@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filmik wysuwający się z prawej strony</title>
+    <style>
+        /* Tło strony */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            background: linear-gradient(to right, #4CAF50, #2196F3);
+            overflow: hidden; /* Ukrycie suwaków na stronie */
+        }
+
+        /* Kontener z filmikiem */
+        .video-container {
+            position: absolute; /* Kontrolowanie położenia */
+            top: 50%; /* Wyśrodkowanie kontenera w pionie */
+            right: -450px; /* Początkowo ukryty poza prawą krawędzią */
+            transform: translateY(-50%); /* Wyrównanie do środka w pionie */
+            width: 450px; /* Szerokość wideo */
+            height: 250px; /* Wysokość wideo */
+            background-color: black;
+            transition: right 1.5s ease-out; /* Animacja wysuwania bez skalowania */
+            border-radius: 10px; /* Zaokrąglone rogi kontenera */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Subtelny cień */
+            border: 3px solid white; /* Biały border wokół kontenera */
+        }
+
+        /* Aktywna klasa dla kontenera, wysuwająca filmik */
+        .video-container.active {
+            right: 20px; /* Wysuwanie na widoczne miejsce */
+        }
+
+        /* Styl dla samego wideo */
+        video {
+            width: 100%; /* Dopasowanie szerokości do kontenera */
+            height: 100%; /* Dopasowanie wysokości do kontenera */
+            object-fit: cover; /* Przycięcie wideo, aby wypełniło całą przestrzeń */
+            border-radius: 7px; /* Zaokrąglone rogi filmiku */
+            filter: grayscale(100%); /* Filtr czarno-biały na początku */
+            transition: filter 0.3s ease-in-out; /* Animacja zmiany filtra */
+        }
+
+        /* Efekt po najechaniu na filmik (zabarwienie) */
+        video:hover {
+            filter: grayscale(0%); /* Usuwanie czarno-białego filtra na hover */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="video-container" id="videoContainer">
+        <video autoplay muted loop>
+            <source src="golf8r.mp4" type="video/mp4">
+            Twoja przeglądarka nie obsługuje elementu video.
+        </video>
+    </div>
+
+    <script>
+        // Po załadowaniu strony, uruchamiamy animację wysuwania
+        window.addEventListener("load", () => {
+            const videoContainer = document.getElementById("videoContainer");
+            videoContainer.classList.add("active"); // Dodanie klasy aktywującej animację
+        });
+    </script>
+</body>
+</html>
